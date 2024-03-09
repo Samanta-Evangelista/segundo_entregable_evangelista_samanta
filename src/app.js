@@ -5,31 +5,31 @@ const app = express();
 app.use(express.urlencoded({extended:true}))
 
 
-const productos = [
-    { id: 1, nombre: "Agua mineral", categoria: "bebidas", stock: 2, precio: 500 },
-    { id: 2, nombre: "Jugo Baggio", categoria: "bebidas", stock: 7, precio: 280 },
-    { id: 3, nombre: "Alfajor Blanco", categoria: "golosinas", stock: 18, precio: 150 },
-    { id: 4, nombre: "Alfajor Nrgro", categoria: "golosinas", stock: 13, precio: 150 },
-    { id: 5, nombre: "Tutucas", categoria: "golosinas", stock: 20, precio: 250 },
-    { id: 6, nombre: "Chupetin Pico dulce", categoria: "golosinas", stock: 30, precio: 150 },
-    { id: 7, nombre: "Palitos salados", categoria: "snacks", stock: 25, precio: 350 },
-    { id: 8, nombre: "Papas Fritas", categoria: "snacks", stock: 17, precio: 450 },
-    { id: 9, nombre: "Chizitos", categoria: "snacks", stock: 17, precio: 450 },
-    { id: 10, nombre: "coca-cola", categoria: "Bebidas", stock: 17, precio: 750 },
+const products = [
+    { id: 1, name: "Agua mineral", category: "bebidas", stock: 2, price: 500 },
+    { id: 2, name: "Jugo Baggio", category: "bebidas", stock: 7, price: 280 },
+    { id: 3, name: "Alfajor Blanco", category: "golosinas", stock: 18, price: 150 },
+    { id: 4, name: "Alfajor Nrgro", category: "golosinas", stock: 13, price: 150 },
+    { id: 5, name: "Tutucas", category: "golosinas", stock: 20, price: 250 },
+    { id: 6, name: "Chupetin Pico dulce", category: "golosinas", stock: 30, price: 150 },
+    { id: 7, name: "Palitos salados", category: "snacks", stock: 25, price: 350 },
+    { id: 8, name: "Papas Fritas", category: "snacks", stock: 17, price: 450 },
+    { id: 9, name: "Chizitos", category: "snacks", stock: 17, price: 450 },
+    { id: 10, name: "coca-cola", category: "Bebidas", stock: 17, price: 750 },
 ]
 
 app.get("/", (req, res) =>{
-    res.send(productos);
+    res.send(products);
 });
 
-app.get("/productos", (req, res) =>{
+app.get("/products", (req, res) =>{
     const limit = req.query.limit;
     let products;
 
     if (limit == undefined)
-        products = productos;
+        products = products;
     else
-        products = productos.slice(0,limit);
+        products = products.slice(0,limit);
 
     res.send(products);
 });
@@ -37,7 +37,7 @@ app.get("/productos", (req, res) =>{
 app.get("/producto/:idProducto", (req, res) => {
     const idProducto=req.params.idProducto;
 
-    let producto = productos.find(producto => producto.id == idProducto);
+    let producto = products.find(producto => producto.id == idProducto);
 
     if (!producto){
         return res.send({
