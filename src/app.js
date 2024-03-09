@@ -23,16 +23,18 @@ app.get("/", (req, res) =>{
 });
 
 app.get("/productos", (req, res) =>{
-        res.send(productos);
+    const limit = req.query.limit;
+    let products;
+
+    if (limit == undefined)
+        products = productos;
+    else
+        products = productos.slice(0,limit);
+
+    res.send(products);
 });
 
-app.get("/productos", (req, res) =>{
-    const limit = parseInt(req.query.limit)||5;
-    const primerosProductos=productos.slice(0,limit)
-    res.send(primerosProductos);
-});
-
-app.get("/:idProducto", (req, res) => {
+app.get("/producto/:idProducto", (req, res) => {
     const idProducto=req.params.idProducto;
 
     let producto = productos.find(producto => producto.id == idProducto);
