@@ -24,8 +24,6 @@ app.get("/productos", async (req, res) =>{
 app.get("/producto/:idProducto", async (req, res) => {
     const idProducto = req.params.idProducto;
     
-    console.log(idProducto);
-
     let producto = await MP.getProductById(idProducto);
 
     if (!producto){

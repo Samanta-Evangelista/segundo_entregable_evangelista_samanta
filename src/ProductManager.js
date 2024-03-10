@@ -46,13 +46,13 @@ export class ProductManager {
 
     async getProductById(id) {
         try {
-            this.products = await this.getProducts();
-            const productFound = this.products.find(product => product.id === id)
+            this.products = await this.getProducts();            
+            const productFound = this.products.find(product => product.id == id);
             return productFound ? productFound : console.error('ID no encontrado', error);
         } catch (error) {
             console.error('Error al obtener producto por ID: ', error);
         }
-    }
+    };
 
     async updateProduct(id, update) {
         try {
