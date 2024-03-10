@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from "fs";
 
-class ProductManager {
+export class ProductManager {
     #id = 0;
     constructor(path) {
         this.products = [];
@@ -50,7 +50,7 @@ class ProductManager {
             const productFound = this.products.find(product => product.id === id)
             return productFound ? productFound : console.error('ID no encontrado', error);
         } catch (error) {
-            console.error('Error al obtener producto por ID', error);
+            console.error('Error al obtener producto por ID: ', error);
         }
     }
 
@@ -104,63 +104,3 @@ class ProductManager {
         }
     }
 }
-
-
-
-//pruebas
-const manager = new ProductManager(`${__dirname}/products.json`);  
-
-
-const run = async () => {
-    let products = await manager.getProducts();
-    console.log(products) 
-
-    await manager.addProduct(
-        'baggio',
-        'Bebida',
-        500,
-        'imagen',
-        'c001',
-        50)  
-
-    products = await manager.getProducts();
-    console.log(products); 
-
-    await manager.addProduct('tutuca',
-        'Snack',
-        250,
-        'imagen',
-        'c001',
-        20); 
-
-    await manager.addProduct('jorgito',
-        'Alfajor',
-        150,
-        'imagen',
-        'c002',
-        30);
-    products = await manager.getProducts();
-    console.log(products); 
-
-    await manager.updateProduct(2, { price: 80000, stock: 60 });
-
-    products = await manager.getProducts();
-    console.log(products) 
-    await manager.updateProduct(3, { price: 80000, stock: 60 }); 
-    await manager.addProduct('sevenAp',
-        'Bebida',
-        1500,
-        'imagen',
-        'c003',
-        30); 
-
-    products = await manager.getProducts();
-    console.log(products) 
-    await manager.deleteProduct(3); 
-    
-    products = await manager.getProducts();
-        console.log(products) 
-
-}
-
-run();
